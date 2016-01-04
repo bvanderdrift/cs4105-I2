@@ -2,6 +2,10 @@
 {{#each messages}}
 	{{> message}}
 {{/each}}
+
+{{#if currentUser}}
+	{{> postMessageForm}}
+{{/if}}
 </template>
 
 <template name="message">
@@ -12,4 +16,11 @@
 <p>{{{message}}}</p>
 {{/if}}
 <hr />
+</template>
+
+<template name="postMessageForm">
+<form class="new-message">
+	<input type="text" class="message-input"/>
+	<input type="submit" />
+</form>
 </template>
