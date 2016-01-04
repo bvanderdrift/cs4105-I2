@@ -1,3 +1,11 @@
 <template name="home">
-<p>This is the hello template</p>
+{{#each messages}}
+	{{> message}}
+{{/each}}
+</template>
+
+<template name="message">
+<h3>{{author}}</h3>
+<p>{{message}}</p>
+<hr />
 </template>
