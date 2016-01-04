@@ -21,12 +21,10 @@ Meteor.methods({
 		}
 	},
 
-	clearUsers: function(){
-		clearUsers();
-	},
-
-	clearAll: function(){
-		clearAll();
+	resetSystem: function(userid){
+		if(isAdmin(userid)){
+			clearAll();
+		}
 	},
 
 	loginRequest: function(username, password){

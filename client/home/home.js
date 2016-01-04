@@ -42,6 +42,10 @@ Template.adminControls.events({
   "click .delete-messages": function(){
     Meteor.call("clearMessages", getCurrentUser()._id);
   },
+  "click .reset-system": function(){
+    Meteor.call("resetSystem", getCurrentUser()._id);
+    setCurrentUser(undefined);
+  },
   "click .hide-messages": function(){
     Meteor.call("setHideAllMessages", getCurrentUser()._id, true);
   },
