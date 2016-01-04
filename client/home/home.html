@@ -6,6 +6,10 @@
 
 <template name="message">
 <h3>{{author}}</h3>
+{{#if xsssecure}}
 <p>{{message}}</p>
+{{else}}
+<p>{{{message}}}</p>
+{{/if}}
 <hr />
 </template>
