@@ -10,6 +10,18 @@ Template.home.helpers({
 Template.message.helpers({
   xsssecure: function(){
     return Settings.Security.XSSSecure;
+  },
+  currentUser: function(){
+    return getCurrentUser();
+  },
+  mayShow: function(){
+    return (getCurrentUser() && getCurrentUser().isAdmin) || !this.hidden;
+  }
+});
+
+Template.message.events({
+  "click .hide-message": function(arg){
+    Meteor.call("toggleHideMessage", this._id, getCurrentUser()._id);
   }
 });
 
