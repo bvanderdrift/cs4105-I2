@@ -18,7 +18,7 @@ Template.postMessageForm.events({
      var messageInputField = $(".message-input");
      var messageInput = messageInputField.val();
 
-     Messages.insert(makeMessage(messageInput));
+     Meteor.call("makeMessage", getCurrentUser()._id, messageInput);
 
      messageInputField.val("");
 
@@ -26,10 +26,14 @@ Template.postMessageForm.events({
   }
 });
 
-function makeMessage(text){
-  return {
-    author: getCurrentUser().username,
-    message: text,
-    createdAt: Date.now()
+Template.adminControls.events({
+  "click .delete-messages": function(){
+    Meteor.call("clearMessages", getCurrentUser()._id);
+  },
+  "click .hide-messages": function(){
+    Meteor.call("setHideAllMessages", getCurrentUser()._id, true);
+  },
+  "click .show-messages": function(){
+    Meteor.call("setHideAllMessages", getCurrentUser()._id, false);
   }
-}
+});

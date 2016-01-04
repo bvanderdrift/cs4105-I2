@@ -1,9 +1,13 @@
 <template name="home">
+{{#if currentUser.isAdmin}}
+	{{> adminControls}}
+	<hr />
+{{/if}}
+
 {{#if currentUser}}
 	{{> postMessageForm}}
 	<hr />
 {{/if}}
-
 
 {{#each messages}}
 	{{> message}}
@@ -11,18 +15,28 @@
 </template>
 
 <template name="message">
-<h3>{{author}}</h3>
-{{#if xsssecure}}
-<p>{{message}}</p>
-{{else}}
-<p>{{{message}}}</p>
-{{/if}}
-<hr />
+{{#unless hidden}}
+	<h3>{{author}}</h3>
+	{{#if xsssecure}}
+	<p>{{message}}</p>
+	{{else}}
+	<p>{{{message}}}</p>
+	{{/if}}
+	<hr />
+{{/unless}}
 </template>
 
 <template name="postMessageForm">
+<p>Post Message:</p>
 <form class="new-message">
 	<input type="text" class="message-input"/>
 	<input type="submit" />
 </form>
+</template>
+
+<template name="adminControls">
+<p>Admin Controls:</p>
+<button class="delete-messages">Delete Messages</button>
+<button class="hide-messages">Hide All Messages</button>
+<button class="show-messages">Show All Messages</button>
 </template>
