@@ -1,11 +1,13 @@
 <template name="home">
+{{#if currentUser}}
+	{{> postMessageForm}}
+	<hr />
+{{/if}}
+
+
 {{#each messages}}
 	{{> message}}
 {{/each}}
-
-{{#if currentUser}}
-	{{> postMessageForm}}
-{{/if}}
 </template>
 
 <template name="message">

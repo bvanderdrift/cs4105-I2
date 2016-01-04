@@ -10,3 +10,17 @@
   {{> yield}}
 </body>
 </template>
+
+<template name="loginButtons">
+{{#if currentUser}}
+<p>Hi {{currentUser.username}}</p>
+{{else}}
+<p>Please log in:</p>
+<form>
+	Username: <input type="text" class="username-input"><br />
+	Password: <input type="password" class="password-input"><br />
+	<button class="log-in">Log In</button> <button class="register">Register</button>
+	<p><span class="login-response"></span></p>
+</form>
+{{/if}}
+</template>

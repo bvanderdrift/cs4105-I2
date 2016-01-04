@@ -1,6 +1,9 @@
 Template.home.helpers({
   messages: function(){
     return Messages.find({}, {sort: {createdAt: -1}, limit: Settings.MessageShowCount});
+  },
+  currentUser: function(){
+    return getCurrentUser();
   }
 });
 
@@ -25,7 +28,7 @@ Template.postMessageForm.events({
 
 function makeMessage(text){
   return {
-    author: Meteor.user().username,
+    author: getCurrentUser().username,
     message: text,
     createdAt: Date.now()
   }
