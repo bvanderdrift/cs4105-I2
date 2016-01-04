@@ -8,9 +8,6 @@ Template.home.helpers({
 });
 
 Template.message.helpers({
-  xsssecure: function(){
-    return Settings.Security.XSSSecure;
-  },
   currentUser: function(){
     return getCurrentUser();
   },

@@ -17,11 +17,8 @@
 <template name="message">
 {{#if mayShow}}
 	<h3>{{author}}</h3>
-	{{#if xsssecure}}
-	<p>{{message}}</p>
-	{{else}}
-	<p>{{{message}}}</p>
-	{{/if}}
+
+	<p>{{#markdown}}{{message}}{{/markdown}}</p>
 	
 	{{#if currentUser.isAdmin}}
 		<button class="hide-message">{{#if hidden}}Show{{else}}Hide{{/if}} Message</button>
