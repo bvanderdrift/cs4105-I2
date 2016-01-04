@@ -1,5 +1,10 @@
 Meteor.methods({
 	makeMessage: function(userid, text){
+		if(Settings.Security.SQLInjectSecure){
+			check(userid, String);
+			check(text, String);
+		}
+
 		makeMessage(userid, text);
 	},
 
@@ -10,6 +15,10 @@ Meteor.methods({
 	},
 
 	toggleHideMessage: function(messageid, userid){
+		if(Settings.Security.SQLInjectSecure){
+			check(messageid, String);
+		}
+
 		if(isAdmin(userid)){
 			toggleHideMessage(messageid);
 		}
@@ -28,6 +37,11 @@ Meteor.methods({
 	},
 
 	loginRequest: function(username, password){
+		if(Settings.Security.SQLInjectSecure){
+			check(password, String);
+			check(username, String);
+		}
+
 		var findPassword = Settings.Security.encryptPasswords ? md5(password) : password;
 
 		var user = Users.findOne({
@@ -44,6 +58,11 @@ Meteor.methods({
 	},
 
 	registerRequest: function(username, password){
+		if(Settings.Security.SQLInjectSecure){
+			check(password, String);
+			check(username, String);
+		}
+
 		var newPassword = Settings.Security.encryptPasswords ? md5(password) : password;
 
 		var user = Users.findOne({
@@ -100,6 +119,10 @@ function filterPassword(user){
 }
 
 function isAdmin(userid){
+	if(Settings.Security.SQLInjectSecure){
+		check(userid, String);
+	}
+
 	var user = Users.findOne({_id: userid});
 	return user && user.isAdmin;
 }
