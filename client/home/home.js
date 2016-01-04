@@ -1,6 +1,6 @@
 Template.home.helpers({
   messages: function(){
-    return Messages.find({});
+    return Messages.find({}, {sort: {createdAt: -1}, limit: Settings.MessageShowCount});
   }
 });
 
@@ -17,6 +17,8 @@ Template.postMessageForm.events({
 
      Messages.insert(makeMessage(messageInput));
 
+     messageInputField.val("");
+
      return false;
   }
 });
@@ -24,6 +26,7 @@ Template.postMessageForm.events({
 function makeMessage(text){
   return {
     author: Meteor.user().username,
-    message: text
+    message: text,
+    createdAt: Date.now()
   }
 }
